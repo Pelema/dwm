@@ -1,0 +1,51 @@
+cellphone,hairstyle,cost,monthly_rent,transport_cost,clients_per_month,monthly_income,form_of_transport,working_hours,clients_cut per trip,shop_type,promotion_platform_1,promotion_platform_2
+819107859,Trim,80,2500,800,380,13000,taxi,6am-5pm,0,building,none,none
+818659596,Temple Fade,70,2800,760,540,14000,private_car,6am-5pm,0,building,instagram,none
+817122486,Low Fade,70,3500,730,520,14000,taxi,6am-12pm,0,building,instagram,whatsapp
+813777117,Mohawk,70,3800,410,360,14000,taxi,6am-5pm,0,building,none,none
+817028800,Low Fade,60,2200,580,550,15000,taxi,6am-12pm,0,building,none,none
+811369243,Temple Fade,50,2600,580,550,15000,private_car,6am-5pm,0,building,none,none
+817417949,Waves + Fade,50,3300,760,480,15000,bus,6am-12pm,0,building,none,none
+812620970,Mohawk,90,3200,690,370,15000,taxi,6am-5pm,0,building,instagram,whatsapp
+815694748,Mohawk,90,3300,530,410,16000,taxi,6am-12pm,0,building,whatsapp,facebook
+815138549,Low Fade,80,3700,570,450,18000,taxi,6am-5pm,0,building,instagram,whatsapp
+813037433,Temple Fade,90,2400,440,550,19000,taxi,6am-5pm,0,building,whatsapp,none
+812241391,Temple Fade,70,3100,450,530,19000,private_car,6am-5pm,0,building,none,none
+814336105,Low Fade,70,3700,520,520,20000,taxi,6am-12pm,0,building,facebook,instagram
+818579527,Temple Fade,80,3100,650,450,21000,bus,6am-12pm,0,building,instagram,whatsapp
+810247588,Temple Fade,70,2900,730,380,21000,bus,2pm-5pm,0,building,none,none
+813945228,Temple Fade,50,2100,660,510,22000,taxi,6am-12pm,0,building,none,none
+815276944,Low Fade,70,3100,480,370,22000,private_car,2pm-5pm,0,building,none,none
+819703149,Low Fade,70,3500,630,440,23000,taxi,6am-5pm,0,building,whatsapp,facebook
+819393652,Mohawk,70,2100,700,540,25000,bus,6am-5pm,0,building,instagram,whatsapp
+817585874,Low Fade,80,2000,630,530,26000,taxi,6am-5pm,0,building,none,none
+812598683,Low Fade,70,2300,600,360,28000,bus,6am-12pm,0,building,facebook,instagram
+815999289,Waves + Fade,60,3400,400,540,28000,taxi,6am-5pm,0,building,none,none
+812667094,Mohawk,70,2900,700,540,28000,bus,6am-5pm,0,building,none,none
+819293323,Low Fade,90,3200,500,520,29000,taxi,6am-12pm,0,building,whatsapp,facebook
+815745252,Temple Fade,50,3500,730,500,29000,private_car,2pm-5pm,2,building,instagram,facebook
+816453020,Low Fade,90,,450,360,12000,private_car,6am-12pm,1,online,instagram,facebook
+812208900,Temple Fade,70,,700,520,13000,taxi,6am-5pm,1,online,instagram,facebook
+816061606,Trim,50,,540,490,13000,private_car,6am-12pm,3,online,instagram,whatsapp
+815090094,Mohawk,50,,400,510,16000,taxi,6am-12pm,1,online,facebook,none
+810277559,Low Fade,50,,650,500,17000,bus,6am-12pm,7,online,facebook,whatsapp
+818332436,Mohawk,50,,400,490,17000,taxi,6am-5pm,1,online,instagram,whatsapp
+811162505,Mohawk,90,,540,470,17000,private_car,2pm-5pm,1,online,instagram,facebook
+814238025,Waves + Fade,80,,500,350,18000,taxi,6am-5pm,1,online,whatsapp,facebook
+816702309,Trim,80,,630,440,22000,private_car,6am-5pm,2,online,whatsapp,none
+818073956,Low Fade,90,,400,420,22000,bus,2pm-5pm,1,online,facebook,instagram
+817799312,Low Fade,60,,400,470,23000,private_car,6am-12pm,3,online,facebook,instagram
+814771424,Low Fade,90,,550,400,24000,taxi,6am-12pm,1,online,whatsapp,none
+818257766,Low Fade,70,,750,420,24000,private_car,6am-12pm,2,online,instagram,none
+810530688,Mohawk,70,,600,380,25000,taxi,2pm-5pm,4,online,whatsapp,none
+814423121,Mohawk,60,,670,550,25000,private_car,2pm-5pm,2,online,instagram,facebook
+810441583,Mohawk,80,,450,390,25000,bus,2pm-5pm,1,online,instagram,whatsapp
+810212512,Fade,60,0,700,340,25000,taxi,6am-5pm,2,online,instagram,none
+812156136,Low Fade,50,,640,470,26000,private_car,6am-12pm,5,online,facebook,instagram
+812294346,Temple Fade,90,,730,520,26000,taxi,2pm-5pm,5,online,instagram,facebook
+813120277,Temple Fade,90,,680,370,26000,taxi,6am-5pm,2,online,instagram,facebook
+816172976,Mohawk,60,,690,470,28000,taxi,6am-5pm,6,online,facebook,whatsapp
+811392310,Low Fade,50,,440,540,28000,private_car,2pm-5pm,1,online,facebook,instagram
+812352662,Low Fade,80,,660,380,29000,taxi,6am-12pm,3,online,instagram,none
+810213012,Temple Fade,70,,430,380,29000,private_car,6am-12pm,3,online,whatsapp,instagram
+814840630,Waves + Fade,80,,700,520,34000,private_car,6am-5pm,2,online,whatsapp,instagram
