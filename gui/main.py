@@ -48,9 +48,7 @@ class OtherFrame(tk.Toplevel):
         tk.Button(self, text="Scatter Plot",  command=self.m_scatter).grid(row=7, columnspan=1)
         tk.Button(self, text="Association").grid(row=8, columnspan=1)
         tk.Button(self, text="Regression", command=self.m_regression).grid(row=9, columnspan=1)
-        self.text = tk.Text(self)
-        self.text.grid(row=0, column=2, rowspan=6)
-        self.text.insert(tk.END, "this is a text area")
+
 
         count = 0
         row = 10
