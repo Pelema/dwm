@@ -49,7 +49,6 @@ class OtherFrame(tk.Toplevel):
         tk.Button(self, text="Association").grid(row=8, columnspan=1)
         tk.Button(self, text="Regression", command=self.m_regression).grid(row=9, columnspan=1)
 
-
         count = 0
         row = 10
         for column in df.columns.values:
