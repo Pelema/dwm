@@ -1,3 +1,9 @@
+import mysql.connector
+import csv
+from tkinter.filedialog import askopenfilename
+from functools import partial
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,18 +17,10 @@ from statsmodels.formula.api import ols
 from sklearn.cluster import KMeans
 import matplotlib
 matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
-from functools import partial
-from tkinter.filedialog import askopenfilename
-import csv
-import mysql.connector
-
-
-
 
 
 df = pd.read_csv("../barbershop.csv")
+
 
 class OtherFrame(tk.Toplevel):
     def __init__(self, original):
@@ -32,14 +30,14 @@ class OtherFrame(tk.Toplevel):
         self.title("Mining")
         self.fig = plt.figure(figsize=(5, 4))
         self.canvas = FigureCanvasTkAgg(self.fig, self)
-        self.calc_set = set()
+        self.calc_set = ["default"]
         self.buttonDict = {}
         self.x_variable = None
         self.y_variable = None
 
         self.create_widgets()
         sns.set(style="whitegrid")
-        
+
         btn = tk.Button(self, text="Back", command=self.onClose)
         btn.grid(row=0)
 
@@ -48,47 +46,89 @@ class OtherFrame(tk.Toplevel):
         self.original_frame.show()
 
     def create_widgets(self):
-        tk.Button(self, text="Clean").grid(row=1, columnspan=1)
-        tk.Button(self, text="Bar chart", command=self.m_bar).grid(row=2, columnspan=1)
-        tk.Button(self, text="Pie Chart", command=self.m_pie).grid(row=3, columnspan=1)
-        tk.Button(self, text="Histogram", command=self.m_hist).grid(row=4, columnspan=1)
-        tk.Button(self, text="Cluster", command=self.m_cluster).grid(row=5, columnspan=1)
-        tk.Button(self, text="Box Plot",  command=self.m_box).grid(row=6, columnspan=1)
-        tk.Button(self, text="Scatter Plot",  command=self.m_scatter).grid(row=7, columnspan=1)
+        tk.Button(self, text="Clean", command=self.m_clean).grid(
+            row=1, columnspan=1)
+        tk.Button(self, text="Bar chart", command=self.m_bar).grid(
+            row=2, columnspan=1)
+        tk.Button(self, text="Pie Chart", command=self.m_pie).grid(
+            row=3, columnspan=1)
+        tk.Button(self, text="Histogram", command=self.m_hist).grid(
+            row=4, columnspan=1)
+        tk.Button(self, text="Cluster", command=self.m_cluster).grid(
+            row=5, columnspan=1)
+        tk.Button(self, text="Box Plot",  command=self.m_box).grid(
+            row=6, columnspan=1)
+        tk.Button(self, text="Scatter Plot",
+                  command=self.m_scatter).grid(row=7, columnspan=1)
         tk.Button(self, text="Association").grid(row=8, columnspan=1)
 
         tk.Label(self, text="x").grid(row=10, column=2)
         tk.Label(self, text="y").grid(row=10, column=4)
 
-        tk.OptionMenu(self, "select", self.calc_set).grid(row=10, column=3)
-        tk.Entry(self, background="white", fg="black").grid(row=10, column=5)
+        self.select_default_x = tk.StringVar()
+        self.select_default_x.set(self.calc_set[0])
 
+        self.select_default_y = tk.StringVar()
+        self.select_default_y.set(self.calc_set[0])
+
+        self.options_x = tk.OptionMenu(
+            self, self.select_default_x, *self.calc_set, command=self.func_x)
+        self.options_x.grid(row=10, column=3)
+
+        self.options_y = tk.OptionMenu(
+            self, self.select_default_y, *self.calc_set, command=self.func_y)
+        self.options_y.grid(row=10, column=5)
 
         colc = 8
         rowc = 0
         for column in df.columns.values:
-            self.buttonDict[column]=tk.Button(self, text=column, command=partial(self.add_to_set, column))
+            self.buttonDict[column] = tk.Button(
+                self, text=column, command=partial(self.add_to_set, column))
             self.buttonDict[column].grid(row=rowc, column=colc, columnspan=1)
             if(colc == 9):
                 colc -= 1
                 rowc += 1
             else:
                 colc += 1
-                
 
     def add_to_set(self, column):
         if(self.buttonDict[column].cget('bg') == 'green'):
             self.calc_set.remove(column)
             self.buttonDict[column].config(background='#383838')
+
         else:
-            self.calc_set.add(column)
+            if ("default" in self.calc_set):
+                self.calc_set.remove("default")
+
+            self.calc_set.append(column)
             self.buttonDict[column].config(background='green')
+
+        menu_x = self.options_x.children['menu']
+        menu_y = self.options_y.children['menu']
+
+        menu_x.delete(0, "end")
+        menu_y.delete(0, "end")
+
+        for string in self.calc_set:
+            menu_x.add_command(label=string,
+                             command=lambda value=string: self.func_x(value))
+            menu_y.add_command(label=string,
+                             command=lambda value=string: self.func_y(value))
+
         return None
 
+    def func_x(self, value):
+        self.x_variable = value
+
+        return self.select_default_x.set(value)
+
+    def func_y(self, value):
+        self.y_variable = value
+        return self.select_default_y.set(value)
 
     def m_scatter(self):
         self.fig.clf()
-        plt.scatter(df[self.y_variable], df[self.x_variable])
+        plt.scatter(df[self.x_variable], df[self.y_variable])
         plt.title('Barbershop Scatterplot')
         plt.xlabel(self.x_variable)
         plt.ylabel(self.y_variable)
@@ -96,24 +136,22 @@ class OtherFrame(tk.Toplevel):
 
     def m_cluster(self):
         self.fig.clf()
-        kmeans = KMeans(n_clusters=2).fit(df[['clients_per_month', 'monthly_income']])
+        kmeans = KMeans(n_clusters=2).fit(df[self.calc_set])
         centroids = kmeans.cluster_centers_
-        plt.scatter(df['clients_per_month'], df['monthly_income'], c=kmeans.labels_, cmap='rainbow')
+        plt.scatter(df[self.x_variable], df[self.y_variable],
+                    c=kmeans.labels_, cmap='rainbow')
+        plt.xlabel(self.x_variable)
+        plt.ylabel(self.y_variable)
         self.draw_canvas()
 
     def m_hist(self):
         self.fig.clf()
 
-        for (i, itm) in enumerate(self.calc_set):
-            clients = self.fig.add_subplot(12+i+1)
-            clients.hist(df[itm], bins=10)
-            clients.set_xlabel('Count')
-            clients.set_title(itm + " histogram")
-            
+        plt = self.fig.add_subplot(111)
+        plt.hist(df[self.x_variable], bins=10)
+        plt.set_xlabel(self.x_variable)
+        plt.set_title(self.x_variable + " histogram")
         self.draw_canvas()
-
-        
-
 
     def m_box(self):
         self.fig.clf()
@@ -121,16 +159,30 @@ class OtherFrame(tk.Toplevel):
         self.draw_canvas()
 
     def m_pie(self):
-        type_counts = df['promotion_platform_1'].value_counts()
-        df2 = pd.DataFrame({'prtype': type_counts}, 
-                        index = ['b', 'o', 'r', 'u'])
-        df2.plot.pie(y='prtype', figsize=(10, 10), autopct='%1.1f%%')
+        self.fig.clf()
+        plt = self.fig.add_subplot(111)
+        plt.set_title(self.x_variable + " pie chart")
+        type_counts_1 = df[self.x_variable].value_counts()
+
+        df1 = pd.DataFrame({'prtype': type_counts_1},
+                        index=type_counts_1.keys())
+
+        plt.pie(df1['prtype'], labels=type_counts_1.keys(), autopct='%1.1f%%')
+
         self.draw_canvas()
 
     def m_bar(self):
         self.fig.clf()
+        plt = self.fig.add_subplot(111)
+        plt.set_title(self.x_variable + " bar chart")
         sns.countplot(x=self.x_variable, data=df[self.calc_set])
         self.draw_canvas()
+
+    def m_clean(self):
+        df['hairstyle'].str.lower()
+        median = df['transport_cost'].median()
+        df.fillna({'monthly_rent':0, 'clients_per_trip': 0, 'transport_cost':median}, inplace=True)
+        
 
     def draw_canvas(self):
         self.canvas = FigureCanvasTkAgg(self.fig, self)
@@ -167,7 +219,7 @@ class MyApp(object):
                 classes, mark )' \
                 'VALUES("%s", "%s", "%s")', 
                 row)
-        #close the connection to the database.
+        # close the connection to the database.
         cursor.close()
         return 0
 
